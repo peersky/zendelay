@@ -8,7 +8,7 @@
   ==============================================================================
 */
 
-#include "ZENLink.h"
+#include "AppWrapper.h"
 #include <algorithm>
 
 #define MYTEST 0

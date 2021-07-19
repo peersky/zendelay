@@ -10,7 +10,8 @@
 #define ZENLink_h
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "../../source/zen.h"
+#include "../zenlib/zen.h"
+#include "../zenlib/utils/tables.h"
 #include "stdlib.h"
 
 enum SlidersEnum
@@ -80,14 +81,16 @@ inline float getSliderValue(SlidersEnum i)
 {
 	float value = 0.0f;
 	value = cSliderValues[i];
-		//	for (int i = 0; i < cSliderNames.size(); i++)
-		//	{
-		//		if (name == cSliderNames[i])
-		//		{
-		//			value = cSliderValues[i];
-		//			break;
-		//		}
-		//	}
+
+	if(i == SLIDER_FEEDBACK)
+	{
+		float range = cSliderRangesMax[i] - cSliderRangesMin[i];
+		float invStep = 4095.0f/range;
+		float indexf = value*invStep;
+		size_t index = (size_t)indexf;
+		return Feedback_Shape[index];
+		
+	}
 	
 	return value;
 }
@@ -108,7 +111,7 @@ inline void slidersConstruct()
 	float step12b = 1.0f/4096.0f;
 	setSlider(SLIDER_DELAY, "Delay", 0, 500, step12b, 0.5f, "ms");
 	setSlider(SLIDER_SPREAD, "Spread", 0, 50, step12b, 0.5f, "ms");
-	setSlider(SLIDER_FEEDBACK, "Feedback", 0, 1.3, step12b, 0.5f, "%");
+	setSlider(SLIDER_FEEDBACK, "Feedback", 0, 1.1, step12b, 0.5f, "%");
 	setSlider(SLIDER_LFO_FREQ,"LFO", 0,  1000, step12b, 0.5f, "Hz");
 	setSlider(SLIDER_FILTER_RESO, "Q", 0, 1000, step12b, 0.5f, "");
 	setSlider(SLIDER_REVERB_SIZE, "Size", 0, 1, step12b, 0.5f, "");

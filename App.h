@@ -13,8 +13,8 @@
 #define ZEN_USE_DYNAMIC_ALLOCATION 0
 
 
-#include "ZENLink.h"
-#include "../../source/zen.h"
+#include "AppWrapper.h"
+#include "../zenlib/zen.h"
 
 
 //namespace zen {
@@ -37,7 +37,7 @@
 
 	// ZENTest API
 float   ZENTest_tick            (float input);
-void ZENTest_processBlock(const float **in, float **out, int chan_num, size_t size);
+void 	ZENTest_processBlock(const float **in, float **out, int chan_num, size_t size);
 void    ZENTest_init            (float sampleRate, int blocksize);
 void    ZENTest_block           (void);
 void    ZENTest_end             (void);

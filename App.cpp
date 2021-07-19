@@ -1,4 +1,4 @@
-#include "ZenProcessor.h"
+#include "AppWrapper.h"
 #include <math.h>
 
 
@@ -89,7 +89,7 @@ void    ZENTest_init            (float sampleRate, int blockSize)
 	
 	filterTest.Init();
 	stereoDelay.prepareToPlay();
-	feedbackCompressor.prepareToPlay(3.0f, 0.35f);
+	feedbackCompressor.prepareToPlay(2.5f, 0.5f);
 	for (int ch = 0; ch< NUM_DELAY_CHANNELS; ch++)
 	{
 		
@@ -187,13 +187,12 @@ void ZENTest_processBlock(const float **in, float **out, int chan_num, size_t si
 	float LFOVals[size];
 	
 	lfo.processBlock(LFOVals, sliders_blocks[SLIDER_LFO_FREQ], size);
-		//		float wave_io[ZEN_BLOCK_SIZE];
-	wave.processBlock(out[0], sliders_blocks[SLIDER_LFO_FREQ], size);
-	memcpy(out[1], out[0], 4*size);
+//	wave.processBlock(out[0], sliders_blocks[SLIDER_LFO_FREQ], size);
+//	memcpy(out[1], out[0], 4*size);
 	
 //	const float *delayInputChPointer[2] = {out[0], out[0]};
 	
-	stereoDelay.processBlock((const float **)out,out, sliders_blocks[SLIDER_DELAY], (float**)delay_offsets, size, sliders_blocks[SLIDER_FEEDBACK], 0.1f);
+	stereoDelay.processBlock((const float **)in,out, sliders_blocks[SLIDER_DELAY], (float**)delay_offsets, size, sliders_blocks[SLIDER_FEEDBACK], 0.1f);
 	
 //	delay[0].processBlock(out[0], out[0], sliders_blocks[SLIDER_DELAY], size, sliders_blocks[SLIDER_FEEDBACK]);
 //	delay[1].processBlock(out[0], out[1], sliders_blocks[SLIDER_DELAY], sliders_blocks[SLIDER_SPREAD], size, sliders_blocks[SLIDER_FEEDBACK]);
@@ -228,51 +227,3 @@ void    ZENTest_end             (void)
 	
 }
 
-
-
-
-
-	//float   ZENTest_tick            (float input)
-	//{
-	//		UI elements
-	//	setLabelValue(UIlabels);
-	//	UIlabels[0] = (float)delay.get_delay();
-	//	UIlabels[1] = sliderInterpolator[0].a_;
-
-	//Processing
-
-	//	static int count = 0;
-	//	count++;
-	//    float slider1 = 0.001f+getSliderValue("slider1");
-	//	float slider2 = 0.001f+getSliderValue("slider2");
-	//	float slider3 = 0.001f+getSliderValue("slider3");
-	//	delta = fInterpolator.y - slider1;
-	//
-	//	float slider1 = getSliderValue(0);
-	//	float slider2 = getSliderValue(1);
-	//	float slider3 = getSliderValue(2);
-	//
-	//	slider1 = sliderInterpolator[0].tick(slider1);
-	//	slider2 = sliderInterpolator[1].tick(slider2);
-	//	slider3 = sliderInterpolator[2].tick(slider3);
-
-	//	float lfoFreq = 10.0f*slider2;
-	//	lfo.setFreq(lfoFreq);
-
-	//	float waveFreq = 440;
-	//	wave.setFreq(waveFreq);
-
-	//	float ModulationDepth = slider3;
-
-
-	//	float newDelay = 24000.0f*slider1;// * (1 - ModulationDepth * lfo.tick());
-	//	delay.set_delay(newDelay);
-
-	//	svf_set_f_q(&FilterTest, slider3*0.5, slider2*1000, FREQUENCY_ACCURATE);
-	//	return svf_tick_mono(&FilterTest, getRandomFloat(), FILTER_MODE_BAND_PASS);
-
-	//	delay.Write(wave.tick());
-	//	return delay.WriteRead(input, newDelay  );
-	//	return svf_tick_mono(&FilterTest, (wave_tick(&wave)+wave_tick(&wave2))/2, FILTER_MODE_LOW_PASS);
-
-	//}
