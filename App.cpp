@@ -47,7 +47,7 @@ float memory[MSIZE];
 	//zen::Wave *wave3;
 zen::Wave wave(ZenInstance);
 zen::Wave lfo(ZenInstance);
-zen::TapeInterpolator sliderInterpolator[SLIDER_NUM_ENUM];
+zen::Interpolator sliderInterpolator[SLIDER_NUM_ENUM];
 	//zenInterpolate_t phaseInterpolator, fInterpolator, filterInterpolator;
 zen::Svf filterTest;
 
@@ -124,31 +124,31 @@ void    ZENTest_init            (float sampleRate, int blockSize)
 
 	
 	setSliderValue(SLIDER_DELAY, 100);
-	sliderInterpolator[SLIDER_DELAY].prepareToPlay(100, 48000, cSliderRangesMax[SLIDER_DELAY]);
+	sliderInterpolator[SLIDER_DELAY].prepareToPlay(100,1);
 	
 	setSliderValue(SLIDER_SPREAD, 0);
-	sliderInterpolator[SLIDER_SPREAD].prepareToPlay(0, 48000, cSliderRangesMax[SLIDER_SPREAD]);
+	sliderInterpolator[SLIDER_SPREAD].prepareToPlay(0, 1);
 	
 	setSliderValue(SLIDER_FEEDBACK, 0);
-	sliderInterpolator[SLIDER_FEEDBACK].prepareToPlay(0, 48000, cSliderRangesMax[SLIDER_FEEDBACK]);
+	sliderInterpolator[SLIDER_FEEDBACK].prepareToPlay(0,1);
 	
 	setSliderValue(SLIDER_LFO_FREQ, 440);
-	sliderInterpolator[SLIDER_LFO_FREQ].prepareToPlay(10, 48000, cSliderRangesMax[SLIDER_LFO_FREQ]);
+	sliderInterpolator[SLIDER_LFO_FREQ].prepareToPlay(10, 1);
 	
 	setSliderValue(SLIDER_MODULATION_DEPTH, 0);
-	sliderInterpolator[SLIDER_MODULATION_DEPTH].prepareToPlay(0, 48000, cSliderRangesMax[SLIDER_MODULATION_DEPTH]);
+	sliderInterpolator[SLIDER_MODULATION_DEPTH].prepareToPlay(0, 1);
 	
 	setSliderValue(SLIDER_FILTER_CUTOFF, 440);
-	sliderInterpolator[SLIDER_FILTER_CUTOFF].prepareToPlay(440, 48000, cSliderRangesMax[SLIDER_FILTER_CUTOFF]);
+	sliderInterpolator[SLIDER_FILTER_CUTOFF].prepareToPlay(440,1);
 	
 	setSliderValue(SLIDER_FILTER_RESO, 10);
-	sliderInterpolator[SLIDER_FILTER_RESO].prepareToPlay(10, 48000, cSliderRangesMax[SLIDER_FILTER_RESO]);
+	sliderInterpolator[SLIDER_FILTER_RESO].prepareToPlay(10,1);
 	
 	setSliderValue(SLIDER_REVERB_DECAY, 0);
-	sliderInterpolator[SLIDER_REVERB_DECAY].prepareToPlay(0, 48000, cSliderRangesMax[SLIDER_REVERB_DECAY]);
+	sliderInterpolator[SLIDER_REVERB_DECAY].prepareToPlay(0, 1);
 	
 	setSliderValue(SLIDER_REVERB_SIZE, 0);
-	sliderInterpolator[SLIDER_REVERB_SIZE].prepareToPlay(0, 48000, cSliderRangesMax[SLIDER_REVERB_SIZE]);
+	sliderInterpolator[SLIDER_REVERB_SIZE].prepareToPlay(0, 1);
 
 }
 
@@ -160,20 +160,6 @@ void update_UI()
 	setLabelValue(UIlabels);
 }
 
-void interpolatedBlockFromSample(float endValue, float* output, size_t size, zen::TapeInterpolator &interpolator, float gain)
-{
-	endValue = ceil(4096*endValue);
-	endValue = endValue/4096;
-	float startValue = output[size-1]/gain;
-//	float startValue = (output[size-1]>0 && output[size-1]<abs(gain)) ? output[size-1]/gain : 0.0f;
-	for (int i = 0; i< size; i++ )
-	{
-		float lerpStep = lerp(startValue, endValue, (float) i/size);
-		float out =  gain* interpolator.tick(lerpStep);
-		output[i] = out;
-	}
-	
-}
 
 
 
@@ -211,12 +197,12 @@ void ZENTest_processBlock(const float **in, float **out, int chan_num, size_t si
 	float LFOVals[size];
 	
 	lfo.processBlock(LFOVals, sliders_blocks[SLIDER_LFO_FREQ], size);
-//	wave.processBlock(out[0], sliders_blocks[SLIDER_LFO_FREQ], size);
-//	memcpy(out[1], out[0], 4*size);
+	wave.processBlock(out[0], sliders_blocks[SLIDER_LFO_FREQ], size);
+	memcpy(out[1], out[0], 4*size);
 	
 //	const float *delayInputChPointer[2] = {out[0], out[0]};
 	
-	stereoDelay.processBlock((const float **)in,out, sliders_blocks[SLIDER_DELAY], (float**)delay_offsets, size, sliders_blocks[SLIDER_FEEDBACK], 0.1f);
+	stereoDelay.processBlock((const float **)out,out, sliders_blocks[SLIDER_DELAY], (float**)delay_offsets, size, sliders_blocks[SLIDER_FEEDBACK], 0.1f);
 	
 //	delay[0].processBlock(out[0], out[0], sliders_blocks[SLIDER_DELAY], size, sliders_blocks[SLIDER_FEEDBACK]);
 //	delay[1].processBlock(out[0], out[1], sliders_blocks[SLIDER_DELAY], sliders_blocks[SLIDER_SPREAD], size, sliders_blocks[SLIDER_FEEDBACK]);
