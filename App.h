@@ -1,12 +1,27 @@
 /*
-  ==============================================================================
+ MIT License
+ 
+ Copyright (c) 2021 Tim Pechersky
+ 
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ 
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
 
-    MyTest.h
-    Created: 23 Jan 2017 9:39:38am
-    Author:  Michael R Mulshine
-
-  ==============================================================================
-*/
 
 #pragma once
 
@@ -16,26 +31,7 @@
 #include "AppWrapper.h"
 #include "../zenlib/zen.h"
 
-
-//namespace zen {
-//class ZenProcessor
-//{
-//public:
-//	ZenProcessor(float sampleRate, int blockSize): Instance (sampleRate, (size_t)blockSize, &getRandomFloat)
-//	{
-//
-//	}
-//	~ZenProcessor()
-//	{
-//
-//	}
-//private:
-//
-//};
-//} //namespace zen
-
-
-	// ZENTest API
+//ZEN API
 float   ZENTest_tick            (float input);
 void 	ZENTest_processBlock(const float **in, float **out, int chan_num, size_t size);
 void    ZENTest_init            (float sampleRate, int blocksize);
