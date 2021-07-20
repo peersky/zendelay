@@ -25,8 +25,9 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "../zenlib/zen.h"
+#include "../zenlib/dsp/TapeInterpolator.h"
 #include "../zenlib/utils/tables.h"
+#include "../zenlib/zen.h"
 #include "stdlib.h"
 
 enum SlidersEnum

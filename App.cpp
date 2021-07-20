@@ -47,7 +47,7 @@ float memory[MSIZE];
 	//zen::Wave *wave3;
 zen::Wave wave(ZenInstance);
 zen::Wave lfo(ZenInstance);
-zen::Interpolator sliderInterpolator[SLIDER_NUM_ENUM];
+zen::TapeInterpolator sliderInterpolator[SLIDER_NUM_ENUM];
 	//zenInterpolate_t phaseInterpolator, fInterpolator, filterInterpolator;
 zen::Svf filterTest;
 
@@ -68,21 +68,20 @@ float **delay_offsets = new float*[NUM_DELAY_CHANNELS];
 float wave_out[2048];
 
 // crazy idea with feedback chains
-zen::Compressor<float> feedbackCompressor;
-typedef  float (zen::Compressor<float>::*CompressorTick)(float newValue);
-CompressorTick fbCompressorTickerPtr = &zen::Compressor<float>::tick;
-#define CALL_MEMBER_FN(object,ptrToMember)  ((object).*(ptrToMember))
+zen::SimpleCompressor<float> feedbackCompressor;
+typedef  float (zen::SimpleCompressor<float>::*CompressorTick)(float newValue);
+CompressorTick fbCompressorTickerPtr = &zen::SimpleCompressor<float>::tick;
 float feedbackChain0(float input)  // Use a typedef for pointer-to-member types
 {
 	
-	float ans = CALL_MEMBER_FN(feedbackCompressor,fbCompressorTickerPtr)(input);
+	float ans = ZEN_CALL_MEMBER_FN(feedbackCompressor,fbCompressorTickerPtr)(input);
 	return ans;
 }
 
 float feedbackChain1(float input)  // Use a typedef for pointer-to-member types
 {
 	
-	float ans = CALL_MEMBER_FN(feedbackCompressor,fbCompressorTickerPtr)(input);
+	float ans = ZEN_CALL_MEMBER_FN(feedbackCompressor,fbCompressorTickerPtr)(input);
 	return ans;
 }
 
@@ -161,7 +160,7 @@ void update_UI()
 	setLabelValue(UIlabels);
 }
 
-void interpolatedBlockFromSample(float endValue, float* output, size_t size, zen::Interpolator &interpolator, float gain)
+void interpolatedBlockFromSample(float endValue, float* output, size_t size, zen::TapeInterpolator &interpolator, float gain)
 {
 	endValue = ceil(4096*endValue);
 	endValue = endValue/4096;

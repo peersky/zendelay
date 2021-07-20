@@ -39,7 +39,7 @@ void createZenCircle (juce::Path& p)
 	
 		//	juce::ScopedLock lockedForReading (pathCreationLock);
 	
-	static float rotation = 3*PI;
+	static float rotation = 3*ZEN_PI;
 	rotation+=0.03f;
 	float sinus = sin(rotation);
 	float cosinus = cos(rotation);
@@ -54,7 +54,7 @@ void createZenCircle (juce::Path& p)
 	
 	
 	
-	int numRotations = roundToInt(rotation/(2*PI));
+	int numRotations = roundToInt(rotation/(2*ZEN_PI));
 	if(numRotations % 3 == 0)
 	{
 			//		mp *= 0.75;
@@ -64,9 +64,9 @@ void createZenCircle (juce::Path& p)
 	
 	
 	p.startNewSubPath (centerX, centerY);
-	p.addCentredArc(centerX-sinus*mp, centerY+cosinus*mp, mp, mp, 1*rotation, PI, 0);
-	p.addCentredArc(centerX, centerY, r, r, 1*rotation+PI, 0, PI);
-	p.addCentredArc(centerX+sinus*mp, centerY-cosinus*mp, mp, mp, 1*rotation-PI, PI, 0);
+	p.addCentredArc(centerX-sinus*mp, centerY+cosinus*mp, mp, mp, 1*rotation, ZEN_PI, 0);
+	p.addCentredArc(centerX, centerY, r, r, 1*rotation+ZEN_PI, 0, ZEN_PI);
+	p.addCentredArc(centerX+sinus*mp, centerY-cosinus*mp, mp, mp, 1*rotation-ZEN_PI, ZEN_PI, 0);
 	p.closeSubPath();
 	
 	
