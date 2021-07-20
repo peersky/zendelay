@@ -20,6 +20,7 @@ This project intented to run as DAW plugin or  STM32429 embedded.
 - If you really have to write a macro, it must be ALL_CAPS_WITH_UNDERSCORES.
 Since macros have no namespaces, their names must be guaranteed not to clash with macros or symbols used in other libraries or 3rd party code, so you should start them with something unique to your project. All the ZEN macros begin with ZEN_. 
 For enums, use ALL_CAPS_WITH_UNDERSCORES with the same capitalisation that you'd use for a class and its member variables, e.g. Always place ENUM_NUM at the end which will store number of elements in enum:
+```
 enum class MyEnum
 {
     ENUM_VAL_1 = 0,

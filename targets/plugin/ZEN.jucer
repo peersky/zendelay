@@ -12,7 +12,7 @@
               companyEmail="tim@teknologic.lv" displaySplashScreen="1" reportAppUsage="1"
               splashScreenColour="Dark" buildStandalone="1" enableIAA="0" cppLanguageStandard="17"
               companyCopyright="Tim Pechersky aka peersky" pluginFormats="buildAU,buildStandalone,buildVST3"
-              pluginCharacteristicsValue="pluginIsMidiEffectPlugin,pluginWantsMidiIn"
+              pluginCharacteristicsValue="pluginWantsMidiIn,pluginIsMidiEffectPlugin"
               jucerFormatVersion="1" pluginAUMainType="'aufx'" pluginRTASDisableBypass="0"
               pluginRTASDisableMultiMono="0" pluginAAXDisableBypass="0" pluginAAXDisableMultiMono="0"
               projectLineFeed="&#13;&#10;">
@@ -29,8 +29,6 @@
         <FILE id="xwxe1U" name="PluginProcessor.cpp" compile="1" resource="0"
               file="Source/PluginProcessor.cpp"/>
         <FILE id="L2MQTe" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
-        <FILE id="euDngN" name="PluginEditor.cpp" compile="1" resource="0"
-              file="Source/PluginEditor.cpp"/>
       </GROUP>
       <FILE id="CPrrCq" name="App.cpp" compile="1" resource="0" file="../../App.cpp"/>
       <FILE id="QHRLoO" name="App.h" compile="0" resource="0" file="../../App.h"/>
