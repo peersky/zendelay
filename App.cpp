@@ -121,6 +121,7 @@ void    ZENTest_init            (float sampleRate, int blockSize)
 		stereoDelay.setChainProcessor(feedbackChains[ch], ch);
 	}
 	
+	stereoDelay.setDelayType(DELAY_TYPE_DIGITAL);
 
 	
 	setSliderValue(SLIDER_DELAY, 100);
