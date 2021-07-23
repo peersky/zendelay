@@ -125,7 +125,7 @@ inline void slidersConstruct()
 {
 	
 	float step12b = 1.0f/4096.0f;
-	setSlider(SLIDER_DELAY, "Delay", 0, 500, step12b, 0.5f, "ms");
+	setSlider(SLIDER_DELAY, "Delay", 0, 3000, step12b, 0.5f, "ms");
 	setSlider(SLIDER_SPREAD, "Spread", 0, 50, step12b, 0.5f, "ms");
 	setSlider(SLIDER_FEEDBACK, "Feedback", 0, 1.1, step12b, 0.5f, "%");
 	setSlider(SLIDER_LFO_FREQ,"LFO", 0,  1000, step12b, 0.5f, "Hz");

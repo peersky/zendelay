@@ -43,6 +43,7 @@
         <FILE id="CCj6aJ" name="delay_line.h" compile="0" resource="0" file="../../../zenlib/blocks/delay_line.h"/>
         <FILE id="OycTRL" name="feedback.h" compile="0" resource="0" file="../../../zenlib/blocks/feedback.h"/>
         <FILE id="Hwnwt4" name="index.h" compile="0" resource="0" file="../../../zenlib/blocks/index.h"/>
+        <FILE id="OYaaEl" name="reverb.h" compile="0" resource="0" file="../../../zenlib/blocks/reverb.h"/>
         <FILE id="ELeefy" name="svf.h" compile="0" resource="0" file="../../../zenlib/blocks/svf.h"/>
         <FILE id="HIZPc3" name="wave.h" compile="0" resource="0" file="../../../zenlib/blocks/wave.h"/>
         <FILE id="xN8rJL" name="zen_bitcrush.c" compile="0" resource="0" file="../../../zenlib/blocks/zen_bitcrush.c"/>
@@ -68,10 +69,10 @@
               file="../../../zenlib/blocks/zen_zero_crossing.h"/>
       </GROUP>
       <GROUP id="{0C65DF85-1D8C-8C07-E5C6-1F553272FAEB}" name="dsp">
+        <FILE id="aCf5cf" name="DelayInterpolator.h" compile="0" resource="0"
+              file="../../../zenlib/dsp/DelayInterpolator.h"/>
         <FILE id="oFFI7c" name="Interpolator.h" compile="0" resource="0" file="../../../zenlib/dsp/Interpolator.h"/>
         <FILE id="fe08l5" name="math.h" compile="0" resource="0" file="../../../zenlib/dsp/math.h"/>
-        <FILE id="SVIXdw" name="TapeInterpolator.h" compile="0" resource="0"
-              file="../../../zenlib/dsp/TapeInterpolator.h"/>
       </GROUP>
       <GROUP id="{4ADF8368-73A5-95C5-3AAB-69DAD0AD6B14}" name="utils">
         <FILE id="MnIUoh" name="debug.h" compile="0" resource="0" file="../../../zenlib/utils/debug.h"/>

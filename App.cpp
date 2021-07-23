@@ -41,7 +41,7 @@ float a, b, c, d;
 float* bufIn;
 float* bufOut;
 
-#define MSIZE 2048000
+#define MSIZE 2500000
 float memory[MSIZE];
 
 	//zen::Wave *wave3;
@@ -52,7 +52,9 @@ zen::Interpolator sliderInterpolator[SLIDER_NUM_ENUM];
 zen::Svf filterTest;
 
 #define NUM_DELAY_CHANNELS 2
+#define NUM_REVERB_CHANNELS 8
 zen::Delay<float, 48000, 2> stereoDelay(ZenInstance);
+zen::Reverb<float, 144000, 2,4> stereoReverb(ZenInstance);
 
 float UIlabels[SLIDER_NUM_ENUM];
 float delta;
@@ -113,6 +115,7 @@ void    ZENTest_init            (float sampleRate, int blockSize)
 	
 	filterTest.Init();
 	stereoDelay.prepareToPlay();
+	stereoReverb.prepareToPlay();
 	feedbackCompressor.prepareToPlay(2.5f, 0.5f);
 	for (int ch = 0; ch< NUM_DELAY_CHANNELS; ch++)
 	{
@@ -120,8 +123,21 @@ void    ZENTest_init            (float sampleRate, int blockSize)
 		stereoDelay.setChannelDelay(500, ch);
 		stereoDelay.setChainProcessor(feedbackChains[ch], ch);
 	}
+	stereoDelay.setDelayType(zen::delayTypes::DIGITAL);
 	
-	stereoDelay.setDelayType(DELAY_TYPE_DIGITAL);
+	stereoDelay.prepareToPlay();
+	feedbackCompressor.prepareToPlay(2.5f, 0.5f);
+	
+	stereoReverb.setChannelDelay(1, 0);
+	stereoReverb.setChannelDelay(3, 1);
+	stereoReverb.setChannelDelay(5, 2);
+	stereoReverb.setChannelDelay(7, 3);
+	stereoReverb.setChannelDelay(1, 4);
+	stereoReverb.setChannelDelay(3, 5);
+	stereoReverb.setChannelDelay(5, 6);
+	stereoReverb.setChannelDelay(7, 7);
+	
+	stereoReverb.setDelayType(zen::reverbTypes::TAPE);
 
 	
 	setSliderValue(SLIDER_DELAY, 100);
@@ -188,7 +204,7 @@ void ZENTest_processBlock(const float **in, float **out, int chan_num, size_t si
 		
 	}
 	
-	
+	stereoReverb.setDecay(getSliderValue(SLIDER_REVERB_DECAY));
 	
 	
 	float waveFreq = 440;
@@ -198,12 +214,12 @@ void ZENTest_processBlock(const float **in, float **out, int chan_num, size_t si
 	float LFOVals[size];
 	
 	lfo.processBlock(LFOVals, sliders_blocks[SLIDER_LFO_FREQ], size);
-	wave.processBlock(out[0], sliders_blocks[SLIDER_LFO_FREQ], size);
-	memcpy(out[1], out[0], 4*size);
+//	wave.processBlock(out[0], sliders_blocks[SLIDER_LFO_FREQ], size);
+//	memcpy(out[1], out[0], 4*size);
 	
 //	const float *delayInputChPointer[2] = {out[0], out[0]};
 	
-	stereoDelay.processBlock((const float **)out,out, sliders_blocks[SLIDER_DELAY], (float**)delay_offsets, size, sliders_blocks[SLIDER_FEEDBACK], 0.1f);
+	stereoReverb.processBlock((const float **)in,out, sliders_blocks[SLIDER_DELAY], (float**)delay_offsets, size, sliders_blocks[SLIDER_FEEDBACK], 0.1f);
 	
 //	delay[0].processBlock(out[0], out[0], sliders_blocks[SLIDER_DELAY], size, sliders_blocks[SLIDER_FEEDBACK]);
 //	delay[1].processBlock(out[0], out[1], sliders_blocks[SLIDER_DELAY], sliders_blocks[SLIDER_SPREAD], size, sliders_blocks[SLIDER_FEEDBACK]);
