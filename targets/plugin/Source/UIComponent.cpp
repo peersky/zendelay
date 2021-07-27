@@ -209,6 +209,10 @@ void UIComponent::timerCallback(void)
 		}
 		
 	}
+	for (int i = 0; i < cSliderNames.size(); i++)
+	{
+		sliders_[i]->setValue(cSliderValues[i]);
+	}
 //	createZenCircle(zenPath);
 //		repaint ();
 	

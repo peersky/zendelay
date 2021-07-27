@@ -130,12 +130,6 @@ void    ZENTest_init            (float sampleRate, int blockSize)
 	
 	stereoReverb.setChannelDelay(1, 0);
 	stereoReverb.setChannelDelay(3, 1);
-	stereoReverb.setChannelDelay(5, 2);
-	stereoReverb.setChannelDelay(7, 3);
-	stereoReverb.setChannelDelay(1, 4);
-	stereoReverb.setChannelDelay(3, 5);
-	stereoReverb.setChannelDelay(5, 6);
-	stereoReverb.setChannelDelay(7, 7);
 	
 	stereoReverb.setDelayType(zen::reverbTypes::TAPE);
 
@@ -146,7 +140,7 @@ void    ZENTest_init            (float sampleRate, int blockSize)
 	setSliderValue(SLIDER_SPREAD, 0);
 	sliderInterpolator[SLIDER_SPREAD].prepareToPlay(0, 1);
 	
-	setSliderValue(SLIDER_FEEDBACK, 0);
+	setSliderValue(SLIDER_FEEDBACK, 0.1);
 	sliderInterpolator[SLIDER_FEEDBACK].prepareToPlay(0,1);
 	
 	setSliderValue(SLIDER_LFO_FREQ, 440);
@@ -161,8 +155,8 @@ void    ZENTest_init            (float sampleRate, int blockSize)
 	setSliderValue(SLIDER_FILTER_RESO, 10);
 	sliderInterpolator[SLIDER_FILTER_RESO].prepareToPlay(10,1);
 	
-	setSliderValue(SLIDER_REVERB_DECAY, 0);
-	sliderInterpolator[SLIDER_REVERB_DECAY].prepareToPlay(0, 1);
+	setSliderValue(SLIDER_REVERB_DECAY, 0.5);
+	sliderInterpolator[SLIDER_REVERB_DECAY].prepareToPlay(0.5, 1);
 	
 	setSliderValue(SLIDER_REVERB_SIZE, 0);
 	sliderInterpolator[SLIDER_REVERB_SIZE].prepareToPlay(0, 1);
@@ -215,11 +209,12 @@ void ZENTest_processBlock(const float **in, float **out, int chan_num, size_t si
 	
 	lfo.processBlock(LFOVals, sliders_blocks[SLIDER_LFO_FREQ], size);
 //	wave.processBlock(out[0], sliders_blocks[SLIDER_LFO_FREQ], size);
-//	memcpy(out[1], out[0], 4*size);
+	memcpy(out[0], in[0], 4*size);
+	memcpy(out[1], out[0], 4*size);
 	
 //	const float *delayInputChPointer[2] = {out[0], out[0]};
 	
-	stereoReverb.processBlock((const float **)in,out, sliders_blocks[SLIDER_DELAY], (float**)delay_offsets, size, sliders_blocks[SLIDER_FEEDBACK], 0.1f);
+	stereoReverb.processBlock((const float **)out,out, sliders_blocks[SLIDER_DELAY], (float**)delay_offsets, size, sliders_blocks[SLIDER_FEEDBACK], 0.5f);
 	
 //	delay[0].processBlock(out[0], out[0], sliders_blocks[SLIDER_DELAY], size, sliders_blocks[SLIDER_FEEDBACK]);
 //	delay[1].processBlock(out[0], out[1], sliders_blocks[SLIDER_DELAY], sliders_blocks[SLIDER_SPREAD], size, sliders_blocks[SLIDER_FEEDBACK]);
