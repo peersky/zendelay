@@ -32,6 +32,7 @@
 #include "../zenlib/zen.h"
 
 //ZEN API
+void 	setDebugStuff			(float* ch1, float* ch2, size_t size);
 float   ZENTest_tick            (float input);
 void 	ZENTest_processBlock(const float **in, float **out, int chan_num, size_t size);
 void    ZENTest_init            (float sampleRate, int blocksize);
