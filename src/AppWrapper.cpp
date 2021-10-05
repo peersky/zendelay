@@ -1,18 +1,18 @@
 /*
  MIT License
- 
+
  Copyright (c) 2021 Tim Pechersky
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in all
  copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,36 +22,31 @@
  SOFTWARE.
  */
 
-
 #include "AppWrapper.h"
 #include <algorithm>
 
-#define MYTEST 0
-#define FM     1
+#ifdef USE_PLUGIN
 
-std::vector<juce::String> cButtonNames =  std::vector<juce::String>
-{
-    "load"
-};
+#define MYTEST 0
+#define FM 1
+
+std::vector<juce::String> cButtonNames = std::vector<juce::String>{
+    "load"};
 
 std::vector<juce::String> cSliderNames(SLIDER_NUM_ENUM);
-std::vector<juce::String> cLabelNames =  std::vector<juce::String>
-{
-	"Freq",
-	"Alpha",
-	"Beta",
-	"Omega",
+std::vector<juce::String> cLabelNames = std::vector<juce::String>{
+    "Freq",
+    "Alpha",
+    "Beta",
+    "Omega",
 };
 
+std::vector<juce::String> cComboBoxNames = std::vector<juce::String>{
 
-std::vector<juce::String> cComboBoxNames =  std::vector<juce::String>
-{
-    
 };
 
-std::vector<juce::String> cWaveformTypes =  std::vector<juce::String>
-{
-    
+std::vector<juce::String> cWaveformTypes = std::vector<juce::String>{
+
 };
 
 std::vector<float> cSliderModelValues(cSliderNames.size());
@@ -64,7 +59,7 @@ std::vector<float> cSliderRangesMax(cSliderNames.size());
 std::vector<bool> cButtonStates(cButtonNames.size());
 std::vector<int> cComboBoxStates(cComboBoxNames.size());
 std::vector<float> cLabelValues(cLabelNames.size());
-Array<AudioBuffer<float>> loadedAudio;
+Array<AudioBuffer<float> > loadedAudio;
 
 void setSliderModelValue(String name, float val)
 {
@@ -94,7 +89,7 @@ bool getButtonState(String name)
             return cButtonStates[i];
         }
     }
-    
+
     return false;
 }
 
@@ -147,27 +142,21 @@ void setSliderValue(String name, float val)
     }
 }
 
-
-
 void setLabelValue_f(float **pVal)
 {
-	for (int i = 0; i<4; i++)
-	{
-		cLabelValues[i] = *pVal[i];
-	}
-	
-	
+    for (int i = 0; i < 4; i++)
+    {
+        cLabelValues[i] = *pVal[i];
+    }
 }
-
-
-
 
 float getRandomFloat(void)
 {
-    return ((float)rand()/RAND_MAX);
+    return ((float)rand() / RAND_MAX);
 }
 
 void getZenValues()
 {
-	
 }
+
+#endif

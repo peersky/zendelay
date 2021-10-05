@@ -2,10 +2,9 @@
 #include "stm32f4xx_hal.h"
 #include <sys/unistd.h> // STDOUT_FILENO, STDERR_FILENO
 #include "stdint.h"
-#include "stdio.h"
-#include <string>
+// #include <string>
 #define USE_BDSP
-// #include "../../../App.h"
+// #include "../../../src/App.h"
 #include <errno.h>
 
 using namespace std;
@@ -20,10 +19,6 @@ int main()
 	HAL_Init();
 	SystemClock_Config();
 	SystemCoreClockUpdate();
-	auto freq = HAL_RCC_GetHCLKFreq();
-	// TPI->ACPR = (freq / 2000000);
-	// ITM->PORT[0].u32 = 0
-
 	__HAL_RCC_GPIOE_CLK_ENABLE();
 	__HAL_RCC_GPIOC_CLK_ENABLE();
 	__HAL_RCC_GPIOF_CLK_ENABLE();
@@ -33,17 +28,12 @@ int main()
 	__HAL_RCC_GPIOG_CLK_ENABLE();
 	__HAL_RCC_GPIOD_CLK_ENABLE();
 
-	// initialise_monitor_handles();
-
-	printf("SWO test firmware start!\n");
+	static int i = 0;
 	while (1)
 	{
-		static int i = 0;
-		int frq = HAL_RCC_GetHCLKFreq();
-		// ITM_SendChar(65);
-		ITM_SendChar(10);
-		ITM_SendChar(13);
-		printf("SWO test firmware start!\n");
+		i++;
+		printf(i % 2 == 0 ? "tick!\n" : "tack!\n");
+		fflush(stdout);
 		HAL_Delay(1000);
 	}
 }
@@ -170,7 +160,7 @@ static void SystemClock_Config(void)
 }
 
 //overwrite printf() output to send via ITM (SWO)
-int _write(int file, char *ptr, int len)
+extern "C" int _write(int file, char *ptr, int len)
 {
 	int DataIdx;
 

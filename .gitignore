@@ -146,3 +146,6 @@ DerivedData/
 ### JUCE ###
 Builds/
 JuceLibraryCode/
+
+### PLATFORMIO
+__pycache__/
