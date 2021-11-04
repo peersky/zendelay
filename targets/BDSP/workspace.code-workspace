@@ -6,6 +6,12 @@
     },
     {
       "path": "../../src"
+    },
+    {
+      "path": "../../../zenlib"
+    },
+    {
+      "path": "../../../c-devlib"
     }
   ],
   "settings": {
@@ -82,7 +88,15 @@
       "memory_resource": "cpp",
       "cinttypes": "cpp",
       "bsp_debug.h": "c",
-      "debug.h": "c"
+      "debug.h": "c",
+      "debugprovider.h": "c",
+      "stdint.h": "c",
+      "printutils.h": "c",
+      "stm32f4xx_hal.h": "c",
+      "gpio.h": "c",
+      "config.h": "c",
+      "adc.h": "c",
+      "codec.h": "c"
     }
   }
 }

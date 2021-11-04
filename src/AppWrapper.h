@@ -24,19 +24,20 @@
 
 #pragma once
 
-#ifdef USE_PLUGIN
+#ifdef BUILD_TARGET_DAWPLUGIN
 #include "../../JuceLibraryCode/JuceHeader.h"
+#include "stdlib.h"
 #endif
-#ifdef USE_BDSP
+#ifdef BUILD_TARGET_BDSP
 #include "../targets/BDSP/include/bsp.h"
 #endif
 
 #include "../../zenlib/dsp/Interpolator.h"
 #include "../../zenlib/utils/tables.h"
 #include "../../zenlib/zen.h"
-#include "stdlib.h"
 
-#ifdef USE_PLUGIN
+#ifdef BUILD_TARGET_DAWPLUGIN
+
 enum SlidersEnum
 {
 	SLIDER_DELAY = 0,

@@ -73,9 +73,11 @@
               file="../../../zenlib/dsp/DelayInterpolator.h"/>
         <FILE id="oFFI7c" name="Interpolator.h" compile="0" resource="0" file="../../../zenlib/dsp/Interpolator.h"/>
         <FILE id="fe08l5" name="math.h" compile="0" resource="0" file="../../../zenlib/dsp/math.h"/>
+        <FILE id="X3LnQw" name="Matrix.h" compile="0" resource="0" file="../../../zenlib/dsp/Matrix.h"/>
       </GROUP>
       <GROUP id="{4ADF8368-73A5-95C5-3AAB-69DAD0AD6B14}" name="utils">
         <FILE id="MnIUoh" name="debug.h" compile="0" resource="0" file="../../../zenlib/utils/debug.h"/>
+        <FILE id="dIygis" name="PatchRouter.h" compile="0" resource="0" file="../../../zenlib/utils/PatchRouter.h"/>
         <FILE id="pDMp1F" name="RingBuffer.h" compile="0" resource="0" file="../../../zenlib/utils/RingBuffer.h"/>
         <FILE id="R8joBA" name="tables.h" compile="0" resource="0" file="../../../zenlib/utils/tables.h"/>
         <FILE id="No6T2B" name="zen_memory.cpp" compile="1" resource="0" file="../../../zenlib/utils/zen_memory.cpp"/>

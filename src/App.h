@@ -22,22 +22,23 @@
  SOFTWARE.
  */
 
-
 #pragma once
 
 #define ZEN_USE_DYNAMIC_ALLOCATION 0
 
+#if !defined(BUILD_TARGET_DAWPLUGIN) && !defined(BUILD_TARGET_BDSP)
+#error "build target is not defined"
+#endif
 
 #include "AppWrapper.h"
 #include "../../zenlib/zen.h"
 
 //ZEN API
-void 	setDebugStuff			(float* ch1, float* ch2, size_t size);
-float   ZENTest_tick            (float input);
-void 	ZENTest_processBlock(const float **in, float **out, int chan_num, size_t size);
-void    ZENTest_init            (float sampleRate, int blocksize);
-void    ZENTest_block           (void);
-void    ZENTest_end             (void);
-void    ZENTest_noteOn          (int midiNoteNumber, float velocity);
-void    ZENTest_noteOff         (int midiNoteNumber);
-
+void setDebugStuff(float *ch1, float *ch2, size_t size);
+float ZENTest_tick(float input);
+void ZENTest_processBlock(const float **in, float **out, int chan_num, size_t size);
+void ZENTest_init(float sampleRate, int blocksize);
+void ZENTest_block(void);
+void ZENTest_end(void);
+void ZENTest_noteOn(int midiNoteNumber, float velocity);
+void ZENTest_noteOff(int midiNoteNumber);

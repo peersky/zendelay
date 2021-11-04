@@ -25,7 +25,7 @@
 #include "AppWrapper.h"
 #include <algorithm>
 
-#ifdef USE_PLUGIN
+#ifdef BUILD_TARGET_DAWPLUGIN
 
 #define MYTEST 0
 #define FM 1

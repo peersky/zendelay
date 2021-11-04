@@ -1,9 +1,12 @@
+# type: ignore
 from swo_parser import swo_parser_main
 import subprocess
 from os import path, __file__
 import time
 import sys
 
+# import Import from
+# pyright: reportUndefinedVariable=false
 Import("env")
 
 
